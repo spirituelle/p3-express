@@ -7,7 +7,7 @@ const cors = require('cors');
 
 const users = require('./routes/user');
 // const posts = require('./routes/post');
-// const comments = require('./routes/comment');
+const comments = require('./routes/comment');
 // const categories = require('./routes/category');
 // const types = require('./routes/type');
 
@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/users',users)
 // app.use('/post',posts)
-// app.use('/comment',comments)
+app.use('/comment',comments)
 // app.use('/category',categories)
 // app.use('/type',types)
 
