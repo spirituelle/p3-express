@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 
 const connection = new Sequelize('p3-express', 'root', '', {
     host: 'localhost',
-    dialect: 'mysql'
+    dialect: 'mysql',
+    port:3308
 });
 
 module.exports = connection;

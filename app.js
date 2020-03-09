@@ -7,7 +7,7 @@ const cors = require('cors');
 
 // const users = require('./routes/user');
 // const posts = require('./routes/post');
-// const comments = require('./routes/comment');
+const comments = require('./routes/comment');
 // const categories = require('./routes/category');
 // const types = require('./routes/type');
 
@@ -26,14 +26,14 @@ const Tag = require('./models/tag');
 const app = express();
 
 app.use(cors())
-app.use(express.static(path.join(__dirname, 'public')))
+// app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
 // app.use('/user',users)
 // app.use('/post',posts)
-// app.use('/comment',comments)
+app.use('/comment',comments)
 // app.use('/category',categories)
 // app.use('/type',types)
 
