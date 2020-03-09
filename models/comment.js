@@ -18,4 +18,4 @@ const comment = connection.define('comment', {
 
 });
 
-module.exports = type;
+module.exports = comment;
