@@ -1,10 +1,12 @@
 const Comments = require('../models/comment')
+const Post = require('../models/post')
+const User = require('../models/user')
 
 
 
 
 exports.getAllComment = (req, res) => {
-    Comments.findAll()
+    Comments.findAll({ include: [{ model: Post},{model:User }] })
     .then((comments) => res.status(200).json({error: false, data: comments}))
     .catch((err) => console.log(err))
     
@@ -20,8 +22,8 @@ exports.getOneComment = (req, res) => {
 }
 
 exports.addComment = (req, res) => {
-   let { content, active}=req.body
-    Comments.create({ content: content, active: active })
+   let { content, active,postId,userId}=req.body
+    Comments.create({ content: content, active: active,postId:postId,UserId:userId })
     .then((comment) => res.status(200).json({ error: false, data: comment }))
     .catch((err) => res.status(400).json({ error: true, message: "bad request !" }))
 
