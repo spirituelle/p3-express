@@ -3,6 +3,7 @@ const Post = require('../models/post')
 const User = require('../models/user')
 
 
+const {  validationResult} = require('express-validator');
 
 
 exports.getAllComment = (req, res) => {
@@ -23,10 +24,16 @@ exports.getOneComment = (req, res) => {
 
 exports.addComment = (req, res) => {
    let { content, active,postId,userId}=req.body
+   
+   let resultError= validationResult(req).array()
+   if(resultError.length == 0){
     Comments.create({ content: content, active: active,postId:postId,UserId:userId })
     .then((comment) => res.status(200).json({ error: false, data: comment }))
     .catch((err) => res.status(400).json({ error: true, message: "bad request !" }))
-
+    }else{
+    res.status(404).json({ error: true, message: resultError })
+    }
+    
 }
 
 exports.updateComment = (req, res) => {

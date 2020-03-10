@@ -6,6 +6,10 @@ const Categorie = require('./../models/category')
 const Tag = require('./../models/tag')
 const Type = require('./../models/type')
 
+var multer  = require('multer')
+
+
+const {  validationResult} = require('express-validator');
 
 exports.getAllPost = (req, res) => {
     Posts.findAll({ 
@@ -50,9 +54,17 @@ exports.getOnePost = (req, res) => {
 
 exports.addPost = (req, res) => {
    let { content, image, active, tags} = req.body
-    Posts.create({ content: content,image:image , active: active, tags:tags },{include: [ Tag ]})
-    .then(addedPosted => res.status(200).json({ error: false, data: addedPosted }))
-    .catch(err => res.status(404).json({ error: true, message: 'can not added post!' })) 
+
+   let resultError= validationResult(req).array()
+   
+   if(resultError.length == 0){
+        Posts.create({ content: content,image:image , active: active, tags:tags },{include: [ Tag ]})
+            .then(addedPosted => res.status(200).json({ error: false, data: addedPosted }))
+            .catch(err => res.status(404).json({ error: true, message: 'can not added post!' })) 
+   }else{
+    res.status(404).json({ error: true, message: resultError })
+   }
+   
     
 }
 

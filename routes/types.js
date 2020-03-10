@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const TypeController = require('./../controllers/TypeController');
+const {  body } = require('express-validator');
 
 router.get('', TypeController.getAllTypes)
 router.get('/:id', TypeController.getOneType)
