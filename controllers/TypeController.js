@@ -39,7 +39,7 @@ exports.updateType = (req, res) => {
     .catch((err) => res.status(400).json({ error: true, message: "bad request !" }))
 }
 
-exports.showOneType = async (req, res) => {
+exports.getOneType = async (req, res) => {
    
     try {
         let type = await Type.findByPk(req.params.id);
