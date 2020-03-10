@@ -1,4 +1,5 @@
 const Category = require('./../models/category');
+const {  validationResult} = require('express-validator');
 
 
 exports.getAllCategories = (req, res) => {
@@ -13,10 +14,6 @@ exports.getAllCategories = (req, res) => {
 }
 
 exports.storeCategory = (req, res) => {
-    // Category.create({ name: 'fooooo', active: 1 }).then(cat => {
-    //     console.log(cat)
-    //     // you can now access the newly created task via the variable task
-    //   })
 
     let { name, active } = req.body;
 

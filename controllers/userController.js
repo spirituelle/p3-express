@@ -1,5 +1,8 @@
 const User = require('./../models/user')
 
+const Type = require('./../models/type')
+const {  validationResult} = require('express-validator');
+
 exports.addUser = (req, res) => {
 
     let {name, email, password, active, type} = req.body
@@ -18,7 +21,7 @@ exports.updateUser = (req, res) => {
 
 exports.getAllUsers = (req, res) => {
 
-    User.findAll()
+    User.findAll({ include: [{ model: Type}] })
     .then((users) => res.status(200).json({error: false, data: users }) )
     .catch(err => res.status(200).json({error: true, data: users }))
 
