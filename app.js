@@ -5,11 +5,11 @@ const cors = require('cors');
 
 //import routes
 
-const users = require('./routes/user');
-// const posts = require('./routes/post');
+const users = require('./routes/users');
+const posts = require('./routes/posts');
 const comments = require('./routes/comment');
-// const categories = require('./routes/category');
-// const types = require('./routes/type');
+const categories = require('./routes/category');
+const types = require('./routes/types');
 
 
 //Connection with MySQL
@@ -31,11 +31,11 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
-app.use('/users',users)
-// app.use('/post',posts)
+app.use('/user',users)
+app.use('/post',posts)
 app.use('/comment',comments)
-// app.use('/category',categories)
-// app.use('/type',types)
+app.use('/category',categories)
+app.use('/type', types)
 
 
 Post.belongsTo(User)

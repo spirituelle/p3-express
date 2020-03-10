@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router();
 const TypeController = require('./../controllers/TypeController');
 
-router.get('/types', TypeController.getAllTypes)
-router.get('/type/:id', TypeController.getOneType)
-router.post('/types', TypeController.storeType)
-router.put('/type/:id', TypeController.updateType)
-router.delete('/type/:id', TypeController.deleteType)
-router.patch('/type/:id', TypeController.createType)
+router.get('', TypeController.getAllTypes)
+router.get('/:id', TypeController.getOneType)
+router.post('', TypeController.storeType)
+router.put('/:id', TypeController.updateType)
+router.delete('/:id', TypeController.deleteType)
+router.patch('/:id', TypeController.patchType)
+
+module.exports = router;
