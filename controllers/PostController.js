@@ -7,7 +7,7 @@ const Tag = require('./../models/tag')
 const Type = require('./../models/type')
 
 
-exports.getAllPosts = (req, res) => {
+exports.getAllPost = (req, res) => {
     Posts.findAll({ 
         include: [
             { 

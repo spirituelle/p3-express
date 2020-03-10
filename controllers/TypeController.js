@@ -2,10 +2,8 @@ const Type = require('./../models/type');
 
 exports.getAllTypes = (req, res) => {
    
-    Type
-        .findAll()
+    Type.findAll()
         .then((types) => {
-
             res.status(200).json({error: false, data: types })
         })
         .catch(err => res.status(404).json({ error: true, message: 'Types not found !' }))
@@ -26,7 +24,6 @@ exports.storeType = (req, res) => {
 }
 
 exports.updateType = (req, res) => {
-    console.log(req.body)
     let { name, active } = req.body;
 
     Type.update({
@@ -40,19 +37,13 @@ exports.updateType = (req, res) => {
 }
 
 exports.getOneType = async (req, res) => {
-   
-    try {
-        let type = await Type.findByPk(req.params.id);
-        return res.status(200).json({error: false, data: type})
-    } catch (error) {
-        return res.status(404).json({ error: true, message: 'type not found' })
-    }
-    
-        
+       Type.findByPk(req.params.id)
+       .then(type => res.status(200).json({error: false, data: type}))
+       .catch(err => res.status(404).json({ error: true, message: 'type not found' }))    
 }
 
 exports.deleteType =  (req, res) => {
-    return res.send('suppression')
+    res.status(200).json({error: false, data: "you can not delete this types "})   
 }
 
 exports.patchType = (req, res) => {
@@ -62,7 +53,3 @@ exports.patchType = (req, res) => {
             .catch(err => res.status(400).json({ error: true, message: 'bad request!' }))
 }
 
-
-// exports.createType = (req, res) => {
-//     res.render('type/create')
-// }
