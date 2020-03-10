@@ -1,9 +1,9 @@
 const Category = require('./../models/category');
 
+
 exports.getAllCategories = (req, res) => {
    
-    Category
-        .findAll()
+    Category.findAll()
         .then((categories) => {
 
             res.status(200).json({error: false, data: categories })
@@ -13,11 +13,15 @@ exports.getAllCategories = (req, res) => {
 }
 
 exports.storeCategory = (req, res) => {
+    // Category.create({ name: 'fooooo', active: 1 }).then(cat => {
+    //     console.log(cat)
+    //     // you can now access the newly created task via the variable task
+    //   })
 
-    let { title, active } = req.body;
+    let { name, active } = req.body;
 
     Category.create({
-        title: title,
+        name: name,
         active: (active == 'on') ? 1 : 0
     })
     .then((category) => res.status(201).json({ error: false, data: category }))
@@ -27,10 +31,10 @@ exports.storeCategory = (req, res) => {
 
 exports.updateCategory = (req, res) => {
     console.log(req.body)
-    let { title, active } = req.body;
+    let { name, active } = req.body;
 
     Category.update({
-        title: title,
+        name: name,
         active: (active == 'on') ? 1 : 0
     }, {
         where: { id: req.params.id }
