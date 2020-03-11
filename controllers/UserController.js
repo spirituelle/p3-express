@@ -4,7 +4,6 @@ const Type = require('./../models/type')
 const {  validationResult} = require('express-validator');
 
 exports.addUser = (req, res) => {
-
     let {name, email, password, active, type} = req.body
     User.create({ name: name, email: email, password: password, active: active, typeId:type })
     .then(user => res.status(200).json({error: false, data: user }))
