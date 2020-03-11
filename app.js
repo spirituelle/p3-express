@@ -10,7 +10,7 @@ const posts = require('./routes/posts');
 const comments = require('./routes/comment');
 const categories = require('./routes/category');
 const types = require('./routes/types');
-
+const sign = require('./routes/auth')
 
 //Connection with MySQL
 const connection = require('./config/database');
@@ -36,7 +36,7 @@ app.use('/post',posts)
 app.use('/comment',comments)
 app.use('/category',categories)
 app.use('/type', types)
-
+app.use(sign)
 
 Post.belongsTo(User)
 User.hasMany(Post)

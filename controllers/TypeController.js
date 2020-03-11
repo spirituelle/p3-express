@@ -2,7 +2,6 @@ const Type = require('./../models/type');
 
 const {  validationResult} = require('express-validator');
 
-
 exports.getAllTypes = (req, res) => {
    
     Type.findAll()
