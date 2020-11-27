@@ -2,22 +2,31 @@ const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
 
-    const token = req.headers.authorization.split(' ')[1];
-    if(token.length == 0){
-        throw 'Invalid token';
+    let autHeader = req.get('Authorization')
+    if(!autHeader){
+      let error = new Error('Invalid token')
+      error.statusCode= 401
+        throw error;
     }
-    try{
-      const decodedToken = jwt.verify(token, 'premiercledesecuritepourbackend');
-      req.userId = decodedToken.id;
-      next();
+    let decodedToken;
+    const token = autHeader.split(' ')[1];
 
+    try{
+      decodedToken = jwt.verify(token, 'premiercledesecuritepourbackend');
+    
     }
     catch{
-        res.status(401).json({
-            error: new Error('Invalid request!')
-          });
+      const error = new Error('Invalid request !')
+      error.status = 401
+      throw MediaStreamError
     }
-
- 
- 
+    if(!decodedToken){
+      const error = new Error('Not authenticated.');
+        error.statusCode = 401;
+        throw error;
+    }
+  
+    
+    req.userId = decodedToken.id;
+    next();
 };
