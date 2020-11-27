@@ -12,7 +12,7 @@ var multer  = require('multer')
 const {  validationResult} = require('express-validator');
 
 exports.getAllPost = (req, res) => {
-    Posts.findAll({ 
+    Posts.findAll({
         include: [
             { 
                 model: Users,
