@@ -15,12 +15,12 @@ exports.getAllTypes = (req, res) => {
 exports.storeType = (req, res) => {
 
     let { name, active } = req.body;
-
+    console.log(req.body)
     Type.create({
-        name: name,
-        active: (active == 'on') ? 1 : 0
+        name,
+        active,
     })
-    .then((Type) => res.status(201).json({ error: false, data: Type }))
+    .then((Type) => res.status(201).json({ error: false, Type }))
     .catch((err) => res.status(400).json({ error: true, message: 'Please check the data for type' }))
    
 }

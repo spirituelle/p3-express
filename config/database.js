@@ -1,9 +1,13 @@
-const Sequelize = require('sequelize');
 
-const connection = new Sequelize('p3-express', 'root', '', {
-    host: 'localhost',
-    dialect: 'mysql',
-    port: 3306
-});
+const config = require('./../config.json');
+const mysql = require('mysql2/promise');
+const Sequelize  = require('sequelize');
 
-module.exports = connection;
+const { user, password, database } = config.database;
+
+// module.exports = db = {};
+
+const connexion = new Sequelize(database, user, password, { dialect: 'mysql' });
+
+
+module.exports = connexion;

@@ -11,18 +11,25 @@ router.post('/signup',[
         return User.findOne({where:{email: value }}).then(user => {
             if(user){
                 return Promise.reject('E-mail already in use');
+            }else{
+
             }
         })
     })
     .trim(),
     body('password').isLength({ min: 8}),
-    body('name').isString().isLength({ min: 5}),
-    body('image').isString(),
-    body('type').isInt()
+    body('firstName').isString().isLength({ min: 2}),
+    body('lastName').isString(),
+    body('typeId').isInt(),
 
-  ], AuthController.sginIn);
+], AuthController.sginIn);
 
-  router.post('/signin', AuthController.signUp);
+  router.post('/signin',[
+    body('email')
+    .isEmail()
+    .trim(),
+    body('password').isLength({ min: 8}),
+], AuthController.signUp);
 
 
 module.exports = router;
